@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+    <title>Giftos</title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+    
+    <!-- Custom styles for this template -->
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="/static/css/responsive.css" rel="stylesheet" />
+    
+    {% block extra_css %}
+    {% endblock %}
+</head>
+<body>
+    <header class="header_section">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light custom_nav-container w-100">
+            <!-- Brand -->
+            
+    
+            <!-- Toggle button for mobile view -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <!-- Navbar items -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shop/">Shop</a>
+                    </li>
+                    <!-- Category Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% if selected_category %}
+                                {{ selected_category.name }}
+                            {% else %}
+                                Category
+                            {% endif %}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for category in categories %}
+                            <a class="dropdown-item" href="{% url 'main:category_filtered' category.id %}">{{ category.name }}</a>
+                            {% empty %}
+                                <a class="dropdown-item" href="#">No categories available</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about/">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact/">Contact Us</a>
+                    </li>
+                </ul>
+    
+                <!-- Centered Search Bar -->
+                <form class="form-inline mx-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </form>
+    
+                
+                <div class="user_option ml-auto d-flex">
+                    {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'main:logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger mr-2">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+                            </button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'main:login' %}" class="btn btn-outline-primary mr-2">Login</a>
+                        <a href="{% url 'main:register' %}" class="btn btn-outline-secondary">Register</a>
+                    {% endif %}
+                    <a href="/cart/" class="nav-link">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    </a>
+                </div>
+                
+                
+                
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <section class="info_section  layout_padding2-top">
+        <div class="social_container">
+            <div class="social_box">
+                <a href="">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                </a>
+                <a href="">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+                <a href="">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+                <a href="">
+                    <i class="fa fa-youtube" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="info_container ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                        <h6>ABOUT US</h6>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet,</p>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="info_form ">
+                            <h5>Newsletter</h5>
+                            <form action="#">
+                                <input type="email" placeholder="Enter your email">
+                                <button>Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <h6>NEED HELP</h6>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet,</p>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <h6>CONTACT US</h6>
+                        <div class="info_link-box">
+                            <a href="">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                <span> Gb road 123 london Uk </span>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                <span>+01 12345678901</span>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                <span> demo@gmail.com</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer section -->
+        <footer class="footer_section">
+            <div class="container">
+                <p>&copy; <span id="displayYear"></span> All Rights Reserved By
+                    <a href="https://html.design/">Free Html Templates</a>
+                </p>
+            </div>
+        </footer>
+    </section>
+    
+    <!-- end info section -->
+    
+    <script src="/static/js/jquery-3.4.1.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="/static/js/custom.js"></script>
+</body>
+</html>
